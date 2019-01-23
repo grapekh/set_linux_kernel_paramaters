@@ -1,8 +1,11 @@
 #!/bin/bash
 #
-# Parameters needed for Palms
+# Parameters needed for database optimization (Redhat 7 and Ubuntu)
 #
 # Grapek - 20190115
+# Grapek - 20190122 - changed params for better sql performance: 
+#    65535 512000 2048 32000 intstead of 65535 512000 1024 1024
+#     echo "kernel.sem = 65535 512000 1024 1024" >> /etc/sysctl.conf 
 #
 # run this as root!
 #
@@ -22,8 +25,7 @@ echo ""
 echo "Increasing memory limits permanently..."
 
 echo "# 
-# sysctl configuration file for Red Hat Linux - for PALMS
-#
+# sysctl configuration file for Red Hat Linux 7 and/or Ubuntu 
 # Changes needed for Palms...
 #
 kernel.msgmnb=65536
@@ -35,7 +37,7 @@ kernel.shmall=18014398442373116" > /etc/sysctl.d/01-custom.conf
 
 echo ""
 echo "Setting up semaphores in file... "
-echo "kernel.sem = 65535 512000 1024 1024" >> /etc/sysctl.conf 
+echo "kernel.sem = 65535 512000 2048 32000" >> /etc/sysctl.conf 
 
 echo ""
 echo "Testing semaphores and making them so... "
